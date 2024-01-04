@@ -1,22 +1,22 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import questions from '../questions.js'
 
 export default function QuestionBox(props) {
 
   const [index, setIndex] = useState(0);
-  const [darkmode, setDarkMode] = useState(false);
+  const { darkmode, setDarkMode } = props;
   const [highlight, setHighlight] = useState(false);
   const [score, setScore] = useState(0);
 
 
-  const bgStyle = darkmode ? { background: "rgb(18, 72, 112)"} : {};
-  const textColor = highlight ? { color: "#ff0000"} : {};
+  const bgStyle = darkmode ? { background: "rgb(18, 72, 112)" } : {};
+  const textColor = highlight ? { color: "#ff0000" } : {};
 
 
   const toggleHighlight = () => {
     setHighlight(true);
   };
-  
+
   const removeHighlight = () => {
     setHighlight(false);
   };
@@ -29,7 +29,6 @@ export default function QuestionBox(props) {
   const optionClick = (isCorrect) => {
     if (isCorrect) {
       console.log('correct answer')
-
       props.setScore((prevScore) => prevScore + 1);
       console.log(score)
 
@@ -44,7 +43,7 @@ export default function QuestionBox(props) {
       }
     });
   };
-  
+
 
   return (
     <>
@@ -52,14 +51,14 @@ export default function QuestionBox(props) {
 
         <nav className="nav1">
           <h1 className='kalvium'>KALVIUM</h1>
-          <button className="toggle-theme" onClick={toggleDarkMode}>{darkmode? 'LIGHT':'DARK'}</button>
+          <button className="toggle-theme" onClick={toggleDarkMode}>{darkmode ? 'LIGHT' : 'DARK'}</button>
         </nav>
 
         <div className="q-box">
           <h3 className="qno">Question: {[index + 1]} out of 5</h3>
           <h1 className="question" style={textColor}>{questions[index].text}</h1>
 
-          
+
           <div className="option-box">
             {questions[index].options.map((option) => (
               <button
